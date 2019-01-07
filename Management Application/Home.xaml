@@ -1,0 +1,119 @@
+﻿<Window x:Class="Management_Application.Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewProduct="clr-namespace:Management_Application.ViewProducts"
+
+        xmlns:local="clr-namespace:Management_Application"
+        mc:Ignorable="d"
+        x:Name="MyHome"
+        Top="100" Left="100" 
+        Title="Home" Height="480" Width="880"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="10"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <Grid Height="80" VerticalAlignment="Top">
+
+            <Image Source="Resource/bg4.jpg" VerticalAlignment="Center" Stretch="UniformToFill"></Image>
+            <Image Source="Resource/logoblack.png" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80"></Image>
+
+        </Grid>
+
+        <Grid Margin="0 80 0 0">
+            <dragablz:TabablzControl HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" Name="tabControl">
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Width="65">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon HorizontalAlignment="Left" VerticalAlignment="Center" Kind="Archive"></materialDesign:PackIcon>
+                            <Label Grid.Column="1" HorizontalAlignment="Left">Products</Label>
+                        </Grid>
+                    </TabItem.Header>
+                    <viewProduct:Products/>
+                </TabItem>
+                
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Width="65">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon HorizontalAlignment="Left" VerticalAlignment="Center" Kind="Sale"></materialDesign:PackIcon>
+                            <Label Grid.Column="1" HorizontalAlignment="Left">Sales</Label>
+                        </Grid>
+                    </TabItem.Header>
+                    
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Width="65">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon HorizontalAlignment="Left" VerticalAlignment="Center" Kind="DatabasePlus"></materialDesign:PackIcon>
+                            <Label Grid.Column="1" HorizontalAlignment="Left">Import</Label>
+                        </Grid>
+                    </TabItem.Header>
+
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon HorizontalAlignment="Left" VerticalAlignment="Center" Kind="Account"></materialDesign:PackIcon>
+                            <Label Grid.Column="1" HorizontalAlignment="Left" FontSize="10">Customer</Label>
+                        </Grid>
+                    </TabItem.Header>
+                    
+                </TabItem>
+                
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Width="65">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon HorizontalAlignment="Left" VerticalAlignment="Center" Kind="ChartAreaspline"></materialDesign:PackIcon>
+                            <Label Grid.Column="1"  HorizontalAlignment="Left" FontSize="10">Statistic</Label>
+                        </Grid>
+                    </TabItem.Header>
+                    
+                </TabItem>
+         
+            </dragablz:TabablzControl>
+        </Grid>
+
+        <Button
+                Grid.Column="2"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}"
+                Click="Button_Click"
+                Margin="10,0,0,10">
+            <Grid>
+                <materialDesign:PackIcon Height="20" Width="20" Kind="Logout"/>
+            </Grid>            
+        </Button>
+        
+    </Grid>
+</Window>

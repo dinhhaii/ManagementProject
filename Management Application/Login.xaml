@@ -1,0 +1,85 @@
+﻿<Window x:Class="Management_Application.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Management_Application"
+        mc:Ignorable="d"
+        x:Name="login"
+        Top="100" Left="100"
+        Title="Login" Height="450" Width="450"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <Image Source="Resource/bg2.jpg" Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="UniformToFill"></Image>
+        <Grid>
+            <StackPanel VerticalAlignment="Center" Width="300">
+                <Image Margin="0,0,0,25" Source="Resource/logowhite.png" Height="80" ></Image>
+  
+                <Grid Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="5*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon Margin="10,25,0,0" Width="20" Height="20" Grid.Column="0" Kind="Account" />
+
+                    <Label Target="{Binding ElementName=txtbox}" Grid.Column="1" Margin="0,25,0,0">_Username</Label>
+
+                    <TextBox
+                        x:Name="txtbox"
+                        GotMouseCapture="txtbox_GotMouseCapture"
+                        GotKeyboardFocus="txtbox_GotKeyboardFocus"
+                        KeyDown="txtbox_KeyDown"
+                        Grid.Column="2"
+                        materialDesign:HintAssist.Hint=""
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                </Grid>
+
+                <Grid Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="5*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon Margin="10,25,0,0" Width="20" Height="20" Grid.Column="0" Kind="Key"></materialDesign:PackIcon>
+
+                    <Label Target="{Binding ElementName=passwordBox}" Grid.Column="1" Margin="0,25,0,0">_Password</Label>
+
+                    <PasswordBox
+                        x:Name="passwordBox"
+                        GotKeyboardFocus="passwordBox_GotKeyboardFocus"
+                        GotMouseCapture="passwordBox_GotMouseCapture"
+                        KeyDown="passwordBox_KeyDown"
+                        Grid.Column="2"
+                        materialDesign:HintAssist.Hint=""
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                    </PasswordBox>
+                </Grid>
+
+
+                <Grid Height="150">
+                    <Button
+                        Click="Button_Click"
+                        Content="LOGIN"
+                        Width="100"
+                        Height="40"
+                        Style="{DynamicResource MaterialDesignRaisedButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
