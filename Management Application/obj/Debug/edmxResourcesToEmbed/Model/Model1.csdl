@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ManagementDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="IDCategory" />
+    </Key>
+    <Property Name="IDCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="NameCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IDCustomer" />
+    </Key>
+    <Property Name="IDCustomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="NameCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Customer" FromRole="Customer" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="Input">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+      <PropertyRef Name="Serial" />
+    </Key>
+    <Property Name="IDProduct" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntry" Type="DateTime" Precision="3" />
+    <Property Name="Serial" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Price" Type="Single" />
+    <Property Name="IDCategory" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Input_Product" FromRole="Input" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Output">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+      <PropertyRef Name="Serial" />
+    </Key>
+    <Property Name="IDProduct" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateSale" Type="DateTime" Precision="3" />
+    <Property Name="Serial" Type="Int32" Nullable="false" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Deposit" Type="Single" />
+    <Property Name="IDCustomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Amount" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Output_Customer" FromRole="Output" ToRole="Customer" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Output_Product" FromRole="Output" ToRole="Product" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Output_Status" FromRole="Output" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+    </Key>
+    <Property Name="IDProduct" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Price" Type="Single" />
+    <Property Name="IDCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Inputs" Relationship="Self.FK_Input_Product" FromRole="Product" ToRole="Input" />
+    <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Product" FromRole="Product" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="StatisticDate">
+    <Key>
+      <PropertyRef Name="DateSales" />
+    </Key>
+    <Property Name="TotalSales" Type="Int32" />
+    <Property Name="TotalImport" Type="Int32" />
+    <Property Name="TotalPrice" Type="Single" />
+    <Property Name="DateSales" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="IDStatus" />
+    </Key>
+    <Property Name="IDStatus" Type="Int32" Nullable="false" />
+    <Property Name="Status1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Status" FromRole="Status" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Output_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IDCustomer" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IDCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Input_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Input" Type="Self.Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Output_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Output_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="IDStatus" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ManagementDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Inputs" EntityType="Self.Input" />
+    <EntitySet Name="Outputs" EntityType="Self.Output" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="StatisticDates" EntityType="Self.StatisticDate" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Output_Customer" Association="Self.FK_Output_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Output" EntitySet="Outputs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Input_Product" Association="Self.FK_Input_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Input" EntitySet="Inputs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Output_Product" Association="Self.FK_Output_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Output" EntitySet="Outputs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Output_Status" Association="Self.FK_Output_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Output" EntitySet="Outputs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

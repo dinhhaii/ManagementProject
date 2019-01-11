@@ -29,7 +29,10 @@
           <Property Name="IDProduct" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="DateEntry" Type="datetime" />
-          <Property Name="Serial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serial" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Price" Type="real" />
+          <Property Name="IDCategory" Type="int" />
         </EntityType>
         <EntityType Name="Output">
           <Key>
@@ -39,7 +42,7 @@
           <Property Name="IDProduct" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="DateSale" Type="datetime" />
-          <Property Name="Serial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serial" Type="int" Nullable="false" />
           <Property Name="Discount" Type="int" />
           <Property Name="StatusID" Type="int" />
           <Property Name="Deposit" Type="real" />
@@ -204,7 +207,10 @@
           <Property Name="IDProduct" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateEntry" Type="DateTime" Precision="3" />
-          <Property Name="Serial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serial" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Price" Type="Single" />
+          <Property Name="IDCategory" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Input_Product" FromRole="Input" ToRole="Product" />
         </EntityType>
         <EntityType Name="Output">
@@ -215,7 +221,7 @@
           <Property Name="IDProduct" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateSale" Type="DateTime" Precision="3" />
-          <Property Name="Serial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serial" Type="Int32" Nullable="false" />
           <Property Name="Discount" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />
           <Property Name="Deposit" Type="Single" />
@@ -387,6 +393,9 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
                 <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

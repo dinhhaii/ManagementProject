@@ -27,7 +27,8 @@ namespace Management_Application.Model
         public Nullable<float> Price { get; set; }
         public string IDCategory { get; set; }
         public string Picture { get; set; }
-    
+        public bool isSelected { get; set; }
+
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Input> Inputs { get; set; }

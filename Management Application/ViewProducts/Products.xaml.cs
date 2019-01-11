@@ -24,6 +24,7 @@ namespace Management_Application.ViewProducts
     {
         List<Product> listProducts { get; set; }
         List<Product> filterProducts { get; set; }
+
         public Products()
         {
             InitializeComponent();
@@ -47,13 +48,44 @@ namespace Management_Application.ViewProducts
         //[DELETE] All Product Checked
         private void checkBoxDeleteAll_CheckedUnChecked(object sender, RoutedEventArgs e)
         {
-
+            CheckBox checkBox = (CheckBox)e.OriginalSource;
+            if (checkBox.IsChecked == true)
+            {
+                for (int i = 0; i < listProducts.Count; i++)
+                {
+                    listProducts[i].isSelected = true;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < listProducts.Count; i++)
+                {
+                    listProducts[i].isSelected = false;
+                }
+            }
+            dataGridProduct.ItemsSource = null;
+            dataGridProduct.ItemsSource = listProducts;
         }
 
         //[DELETE] Checked and UnChecked Product
         private void checkBoxDelete_CheckedUnChecked(object sender, RoutedEventArgs e)
         {
-
+            CheckBox checkBox = (CheckBox)e.OriginalSource;
+            DataGridRow dataGridRow = VisualTreeHelpers.FindAncestor<DataGridRow>(checkBox);
+            int index = dataGridRow.GetIndex();
+            if (index < listProducts.Count)
+            {
+                if (checkBox.IsChecked == false)
+                {
+                    dataGridRow.Background = Brushes.Transparent;
+                    listProducts[index].isSelected = false;
+                }
+                if (checkBox.IsChecked == true)
+                {
+                    dataGridRow.Background = Brushes.Red;
+                    listProducts[index].isSelected = true;
+                }
+            }
         }
 
 
@@ -61,6 +93,8 @@ namespace Management_Application.ViewProducts
         //RELOAD
         private void buttonReload_Click(object sender, RoutedEventArgs e)
         {
+            listProducts.Clear();
+            listProducts = DataProvider.ins.db.Products.ToList();
             dataGridProduct.ItemsSource = null;
             dataGridProduct.ItemsSource = listProducts;
         }
@@ -70,11 +104,29 @@ namespace Management_Application.ViewProducts
         {
             AddProduct window = new AddProduct();
             window.ShowDialog();
+            buttonReload_Click(sender, e);
         }
 
         //DELETE
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
+            foreach (Product item in listProducts)
+            {
+                if (item != null && item.isSelected == true)
+                {
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Products?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        DataProvider.ins.db.Products.Remove(item);
+                        var itemInput = DataProvider.ins.db.Inputs.SingleOrDefault(x => x.IDProduct == item.IDProduct);
+                        DataProvider.ins.db.Inputs.Remove(itemInput);
+                        DataProvider.ins.db.SaveChanges();
+                        MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
+                        buttonReload_Click(sender, e);
+                    }
+                    break;
+                }
+            }
 
         }
 

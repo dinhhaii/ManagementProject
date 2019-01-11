@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Management_Application.ViewProducts"
              mc:Ignorable="d" 
+             Name="ProductUserControl"
              d:DesignHeight="400" d:DesignWidth="800"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -69,62 +70,48 @@
 
         <!--=========================BUTTON DELETE/UPDATE/ADD=========================-->
         <StackPanel
-            Height="40"
             Orientation="Horizontal"
-            Background="Black"
             HorizontalAlignment="Right"
             VerticalAlignment="Center">
             <!--Reload-->
             <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Width="50"
                 Name="buttonReload"
-                Click="buttonReload_Click">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <materialDesign:PackIcon Kind="Reload"></materialDesign:PackIcon>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                Click="buttonReload_Click"
+                Background="Black">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Reload"></materialDesign:PackIcon>
             </Button>
             <!--Add-->
             <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Width="50"
                 Name="buttonAdd"
-                Click="buttonAdd_Click">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <materialDesign:PackIcon Kind="Add"></materialDesign:PackIcon>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                Click="buttonAdd_Click"
+                Background="Black">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Add"></materialDesign:PackIcon>
             </Button>
             <!--Delete-->
             <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Width="50"
                 Name="buttonDelete"
-                Click="buttonDelete_Click">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <materialDesign:PackIcon Kind="Delete"></materialDesign:PackIcon>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                Click="buttonDelete_Click"
+                Background="Black">
+                <materialDesign:PackIcon Kind="Delete"></materialDesign:PackIcon>
             </Button>
             <!--Update-->
             <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Width="50"
                 Name="buttonUpdate"
-                Click="buttonUpdate_Click">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <materialDesign:PackIcon Kind="Pen"></materialDesign:PackIcon>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                Click="buttonUpdate_Click"
+                Background="Black">
+                <materialDesign:PackIcon Kind="Pen"></materialDesign:PackIcon>
             </Button>
         </StackPanel>
 
@@ -156,7 +143,7 @@
                 <!--Checkbox-->
                 <DataGridTemplateColumn
                     Width="80"
-                    Visibility="Collapsed">
+                    Visibility="Visible">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <CheckBox
@@ -171,7 +158,7 @@
                             <CheckBox
                                 x:Name="checkBoxDelete"
                                 HorizontalAlignment="Center"
-                                IsChecked="{Binding isChecked, Mode=TwoWay}"
+                                IsChecked="{Binding isSelected, Mode=TwoWay}"
                                 Checked="checkBoxDelete_CheckedUnChecked"
                                 Unchecked="checkBoxDelete_CheckedUnChecked"/>
                         </DataTemplate>

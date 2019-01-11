@@ -18,6 +18,9 @@ namespace Management_Application.Model
         public string Name { get; set; }
         public Nullable<System.DateTime> DateEntry { get; set; }
         public int Serial { get; set; }
+        public Nullable<int> Amount { get; set; }
+        public Nullable<float> Price { get; set; }
+        public Nullable<int> IDCategory { get; set; }
     
         public virtual Product Product { get; set; }
     }
