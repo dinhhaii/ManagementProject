@@ -24,6 +24,8 @@ namespace Management_Application.ViewProducts
     {
         List<Product> listProducts { get; set; }
         List<Product> filterProducts { get; set; }
+        bool isDeleted = false;
+        bool isUpdating = true;
 
         public Products()
         {
@@ -38,10 +40,39 @@ namespace Management_Application.ViewProducts
             dataGridProduct.ItemsSource = listProducts;
         }
 
-        //[UPDATE] Click Cell in DataGrid
+        //[UPDATE][DELETE] Click Cell in DataGrid
         private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            DataGridCell myCell = sender as DataGridCell;
+            DataGridRow row = DataGridRow.GetRowContainingElement(myCell);
+            Product temp = row.Item as Product;
 
+            if (isDeleted == true)
+            {
+                for(int i = 0; i < listProducts.Count; i++)
+                {
+                    if(listProducts[i].IDProduct == temp.IDProduct)
+                    {
+                        if (listProducts[i].isSelected == true)
+                        {
+                            listProducts[i].isSelected = false;
+                        }
+                        else
+                        {
+                            listProducts[i].isSelected = true;
+                        }
+                    }
+                }
+                dataGridProduct.ItemsSource = null;
+                dataGridProduct.ItemsSource = listProducts;
+            }
+
+            if (isUpdating == true)
+            {
+                UpdateProduct window = new UpdateProduct(temp);
+                window.ShowDialog();
+                reloadData();
+            }
         }
 
         //======================CHECKBOX======================
@@ -89,9 +120,36 @@ namespace Management_Application.ViewProducts
         }
 
 
-        //======================RELOAD/ADD/DELETE/UPDATE======================
+        //======================RELOAD/ADD/DELETE/FILTER======================
+        //FILTER
+        private void buttonFilter_Click(object sender, RoutedEventArgs e)
+        {
+            FilterProduct window = new FilterProduct();
+            window.ShowDialog();
+            filterProducts = FilterProduct.filterList;
+
+            dataGridProduct.ItemsSource = null;
+            dataGridProduct.ItemsSource = filterProducts;
+
+            buttonAdd.Visibility = Visibility.Collapsed;
+            buttonDelete.Visibility = Visibility.Collapsed;
+            buttonReload.Visibility = Visibility.Collapsed;
+            buttonCloseFilter.Visibility = Visibility.Visible;
+            buttonFilter.Background = Brushes.Red;
+        }
+
+        private void buttonCloseFilter_Click(object sender, RoutedEventArgs e)
+        {
+            buttonAdd.Visibility = Visibility.Visible;
+            buttonDelete.Visibility = Visibility.Visible;
+            buttonReload.Visibility = Visibility.Visible;
+            buttonCloseFilter.Visibility = Visibility.Collapsed;
+            buttonFilter.Background = Brushes.Black;
+            reloadData();
+        }
+
         //RELOAD
-        private void buttonReload_Click(object sender, RoutedEventArgs e)
+        void reloadData()
         {
             listProducts.Clear();
             listProducts = DataProvider.ins.db.Products.ToList();
@@ -99,63 +157,146 @@ namespace Management_Application.ViewProducts
             dataGridProduct.ItemsSource = listProducts;
         }
 
+        private void buttonReload_Click(object sender, RoutedEventArgs e)
+        {
+            reloadData();
+        }
+
         //ADD
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             AddProduct window = new AddProduct();
             window.ShowDialog();
-            buttonReload_Click(sender, e);
+            reloadData();
         }
 
         //DELETE
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Product item in listProducts)
+            if (isDeleted == true)
             {
-                if (item != null && item.isSelected == true)
+                foreach (Product item in listProducts)
                 {
-                    MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Products?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
-                    if (result == MessageBoxResult.Yes)
+                    if (item != null && item.isSelected == true)
                     {
-                        DataProvider.ins.db.Products.Remove(item);
-                        var itemInput = DataProvider.ins.db.Inputs.SingleOrDefault(x => x.IDProduct == item.IDProduct);
-                        DataProvider.ins.db.Inputs.Remove(itemInput);
-                        DataProvider.ins.db.SaveChanges();
-                        MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
-                        buttonReload_Click(sender, e);
+                        MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Products?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            DataProvider.ins.db.Products.Remove(item);
+                            var itemInput = DataProvider.ins.db.Inputs.SingleOrDefault(x => x.IDProduct == item.IDProduct);
+                            DataProvider.ins.db.Inputs.Remove(itemInput);
+                            DataProvider.ins.db.SaveChanges();
+                            MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
+                            reloadData();
+                        }
+                        break;
                     }
-                    break;
                 }
+            }
+            else
+            {
+                isDeleted = true;
+                isUpdating = false;
+                closeDelete.Visibility = Visibility.Visible;
+                buttonReload.Visibility = Visibility.Collapsed;
+                buttonAdd.Visibility = Visibility.Collapsed;
+                buttonFilter.Visibility = Visibility.Collapsed;
+                buttonDelete.Background = Brushes.Red;
+                dataGridProduct.Columns[0].Visibility = Visibility.Visible;
+            }
+        }
+
+        private void buttoncloseDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (isDeleted == true)
+            {
+                isDeleted = false;
+                isUpdating = true;
+                closeDelete.Visibility = Visibility.Collapsed;
+                buttonReload.Visibility = Visibility.Visible;
+                buttonAdd.Visibility = Visibility.Visible;
+                buttonFilter.Visibility = Visibility.Visible;
+                buttonDelete.Background = Brushes.Black;
+                dataGridProduct.Columns[0].Visibility = Visibility.Collapsed;
+
+                listProducts = DataProvider.ins.db.Products.ToList();
+                for(int i = 0; i < listProducts.Count; i++)
+                {
+                    listProducts[i].isSelected = false;
+                }
+                dataGridProduct.ItemsSource = null;
+                dataGridProduct.ItemsSource = listProducts;
             }
 
         }
 
-        //UPDATE
-        private void buttonUpdate_Click(object sender, RoutedEventArgs e)
+        //======================SEARCH======================
+        private bool isSearching = false;
+
+        private void searchItem()
         {
-            UpdateProduct window = new UpdateProduct();
-            window.ShowDialog();
+            for(int i = 0; i < listProducts.Count; i++)
+            {
+                string str = listProducts[i].Name.Trim().ToLower().Replace(" ", "");
+                //Tách chuỗi nhập vào thành các từ
+                string expression = txtboxSearch.Text.ToLower();
+                string[] token = expression.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+                int index = 0;
+                //Duyệt qua mảng các từ trong chuỗi nhập
+                for (; index < token.Length; index++)
+                {
+                    //Xóa khoảng trắng
+                    token[index] = token[index].Trim();
+                    //Kiểm tra từ đó xuất hiện trong tên sản phẩm không
+                    int pos = listProducts[i].Name.ToLower().IndexOf(token[index]);
+                    int pos1 = listProducts[i].Category.NameCategory.ToLower().IndexOf(token[index]);
+                    int pos2 = listProducts[i].IDProduct.ToLower().IndexOf(token[index]);
+
+                    //Nếu không xuất hiện 
+                    if (pos < 0 && pos1 < 0 && pos2 < 0)
+                    {
+                        break;
+                    }
+                }
+                if (index == token.Length)
+                {
+                    filterProducts.Add(listProducts[i]);
+                }
+            }
         }
 
-        //======================SEARCH======================
         //TextChanged
         private void txtboxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if(txtboxSearch.Text == "" || txtboxSearch.Text == null)
+            {
+                filterProducts.Clear();
+                iconSearch.Kind = MaterialDesignThemes.Wpf.PackIconKind.Search;
+                isSearching = false;
+                dataGridProduct.ItemsSource = null;
+                dataGridProduct.ItemsSource = listProducts;
+            }
+            else
+            {
+                filterProducts.Clear();
+                iconSearch.Kind = MaterialDesignThemes.Wpf.PackIconKind.Close;
+                isSearching = true;
+                searchItem();
+                dataGridProduct.ItemsSource = null;
+                dataGridProduct.ItemsSource = filterProducts;
+            }
         }
-        //Clear input data
-        private void buttonClearSearch_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
         //Click button Search
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            if (isSearching == true)
+            {
+                txtboxSearch.Text = "";
+            }
         }
 
-        
 
-       
     }
 }

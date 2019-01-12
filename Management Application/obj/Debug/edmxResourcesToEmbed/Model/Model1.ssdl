@@ -27,7 +27,7 @@
     <Property Name="Serial" Type="int" Nullable="false" />
     <Property Name="Amount" Type="int" />
     <Property Name="Price" Type="real" />
-    <Property Name="IDCategory" Type="int" />
+    <Property Name="IDCategory" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Output">
     <Key>
@@ -43,6 +43,7 @@
     <Property Name="Deposit" Type="real" />
     <Property Name="IDCustomer" Type="nchar" MaxLength="10" />
     <Property Name="Amount" Type="int" />
+    <Property Name="IDCategory" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -81,6 +82,18 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_Input_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Input" Type="Self.Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Input_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Input" Type="Self.Input" Multiplicity="*" />
@@ -90,6 +103,18 @@
       </Principal>
       <Dependent Role="Input">
         <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Output_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IDCategory" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -150,9 +175,17 @@
     <EntitySet Name="StatisticDate" EntityType="Self.StatisticDate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Input_Category" Association="Self.FK_Input_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Input" EntitySet="Input" />
+    </AssociationSet>
     <AssociationSet Name="FK_Input_Product" Association="Self.FK_Input_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="Input" EntitySet="Input" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Output_Category" Association="Self.FK_Output_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Output" EntitySet="Output" />
     </AssociationSet>
     <AssociationSet Name="FK_Output_Customer" Association="Self.FK_Output_Customer">
       <End Role="Customer" EntitySet="Customer" />

@@ -6,6 +6,8 @@
     </Key>
     <Property Name="IDCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="NameCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Inputs" Relationship="Self.FK_Input_Category" FromRole="Category" ToRole="Input" />
+    <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Category" FromRole="Category" ToRole="Output" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="Customer">
@@ -29,7 +31,8 @@
     <Property Name="Serial" Type="Int32" Nullable="false" />
     <Property Name="Amount" Type="Int32" />
     <Property Name="Price" Type="Single" />
-    <Property Name="IDCategory" Type="Int32" />
+    <Property Name="IDCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Input_Category" FromRole="Input" ToRole="Category" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Input_Product" FromRole="Input" ToRole="Product" />
   </EntityType>
   <EntityType Name="Output">
@@ -46,6 +49,8 @@
     <Property Name="Deposit" Type="Single" />
     <Property Name="IDCustomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Amount" Type="Int32" />
+    <Property Name="IDCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Output_Category" FromRole="Output" ToRole="Category" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Output_Customer" FromRole="Output" ToRole="Customer" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Output_Product" FromRole="Output" ToRole="Product" />
     <NavigationProperty Name="Status" Relationship="Self.FK_Output_Status" FromRole="Output" ToRole="Status" />
@@ -91,6 +96,30 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
+  <Association Name="FK_Input_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Input" Type="Self.Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Output_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -160,6 +189,14 @@
     <EntitySet Name="StatisticDates" EntityType="Self.StatisticDate" />
     <EntitySet Name="Status" EntityType="Self.Status" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Input_Category" Association="Self.FK_Input_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Input" EntitySet="Inputs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Output_Category" Association="Self.FK_Output_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Output" EntitySet="Outputs" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />

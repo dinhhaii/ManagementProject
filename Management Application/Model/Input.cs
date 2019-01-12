@@ -20,8 +20,10 @@ namespace Management_Application.Model
         public int Serial { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<float> Price { get; set; }
-        public Nullable<int> IDCategory { get; set; }
-    
+        public string IDCategory { get; set; }
+        public bool isSelected { get; set; }
+
+        public virtual Category Category { get; set; }
         public virtual Product Product { get; set; }
     }
 }

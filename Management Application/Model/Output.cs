@@ -23,7 +23,9 @@ namespace Management_Application.Model
         public Nullable<float> Deposit { get; set; }
         public string IDCustomer { get; set; }
         public Nullable<int> Amount { get; set; }
+        public string IDCategory { get; set; }
     
+        public virtual Category Category { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
         public virtual Status Status { get; set; }

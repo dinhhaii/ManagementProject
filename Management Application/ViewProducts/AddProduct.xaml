@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Management_Application.ViewProducts"
         mc:Ignorable="d"
-        Title="Add Product" Height="500" Width="500"
+        Title="Add Product" 
+        Height="550" Width="500"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -15,18 +16,37 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Top="100" Left="100" >
+        Top="150" Left="150" >
 
     <Grid>
         <StackPanel>
             <!--PICTURE-->
             <Grid Margin="0,20,0,0" Height="150" Width="150">
                 <Border BorderThickness="3" BorderBrush="Wheat">
-                    <Image Source="/Resource/noimage.png" Height="150" Width="150"></Image>
+                    <Image Name="imageProduct" Source="/Resource/noimage.png" Height="150" Width="150"></Image>
                 </Border>
             </Grid>
-            <Button Content="Choose Image" Width="150" Margin="0,0,0,20"></Button>
+            <Button Content="Choose Image" Width="150" Margin="0,10,0,20" Click="Button_Click"></Button>
 
+            <Grid Margin="0,0,0,10" Width="150">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <ToggleButton
+                    Name="togglebtnNewProduct"
+                    Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                    ToolTip="MaterialDesignSwitchDarkToggleButton"
+                    VerticalAlignment="Center"
+                    IsChecked="True"
+                    Click="togglebtnNewProduct_Click">
+                </ToggleButton>
+                <TextBlock VerticalAlignment="Center" Grid.Column="1" Text="New Product"></TextBlock>
+            </Grid>
+            
+
+            
             <!--ID-->
             <Grid Width="400">
                 <Grid.ColumnDefinitions>
@@ -36,6 +56,7 @@
 
                 <TextBlock VerticalAlignment="Center" Text="ID Product :"></TextBlock>
                 <TextBox Name="txtboxID" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+                <ComboBox SelectionChanged="comboboxIDProduct_SelectionChanged" Visibility="Collapsed" Name="comboboxIDProduct" VerticalAlignment="Center" Grid.Column="1"></ComboBox>
             </Grid>
 
             <!--NAME-->
@@ -47,28 +68,6 @@
 
                 <TextBlock VerticalAlignment="Center" Text="Name :"></TextBlock>
                 <TextBox Name="txtboxName" VerticalAlignment="Center" Grid.Column="1"></TextBox>
-            </Grid>
-
-            <!--Amount-->
-            <Grid Width="400">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock VerticalAlignment="Center" Text="Amount :"></TextBlock>
-                <TextBox Name="txtboxAmount" VerticalAlignment="Center" Grid.Column="1"></TextBox>
-            </Grid>
-
-            <!--Price-->
-            <Grid Width="400">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock VerticalAlignment="Center" Text="Price :"></TextBlock>
-                <TextBox Name="txtboxPrice" VerticalAlignment="Center" Grid.Column="1"></TextBox>
             </Grid>
 
             <!--Category-->
@@ -85,7 +84,29 @@
                           DisplayMemberPath="NameCategory">
                 </ComboBox>
             </Grid>
+            
+            <!--Price-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
+                <TextBlock VerticalAlignment="Center" Text="Price :"></TextBlock>
+                <TextBox Name="txtboxPrice" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+            
+            <!--Amount-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Amount :"></TextBlock>
+                <TextBox Name="txtboxAmount" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+            
             <!--Date-->
             <Grid Width="400">
                 <Grid.ColumnDefinitions>

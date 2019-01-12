@@ -37,42 +37,49 @@
             TextChanged="txtboxSearch_TextChanged"
             HorizontalAlignment="Left"
             Margin="20,0,0,0" 
-            Width="150" 
-            materialDesign:HintAssist.Hint="Search by product name" 
+            Width="200" 
+            materialDesign:HintAssist.Hint="Search by product Name/ID/Category" 
             VerticalAlignment="Center">
         </TextBox>
         <Button
             Name="buttonSearch"
             Click="buttonSearch_Click"
-            Margin="150,0,0,0">
-            <Button.Template>
-                <ControlTemplate>
-                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" >
-                        <materialDesign:PackIcon x:Name="btnicon" Kind="Search"></materialDesign:PackIcon>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
+            Margin="180,0,0,0"
+            HorizontalAlignment="Left"
+            Width="50"
+            Background="Transparent"
+            BorderBrush="Transparent">
+            <materialDesign:PackIcon Name="iconSearch" Kind="Search"></materialDesign:PackIcon>
         </Button>
 
-        <Button
-            Name="buttonClearSearch"
-            Click="buttonClearSearch_Click"
-            Visibility="Collapsed"
-            Margin="150,0,0,0">
-            <Button.Template>
-                <ControlTemplate>
-                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" >
-                        <materialDesign:PackIcon x:Name="btnicon" Kind="Close"></materialDesign:PackIcon>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <!--=========================BUTTON DELETE/UPDATE/ADD=========================-->
+        <!--=========================BUTTON DELETE/RELOAD/FILTER/ADD=========================-->
         <StackPanel
             Orientation="Horizontal"
             HorizontalAlignment="Right"
             VerticalAlignment="Center">
+            <!--Filter-->
+            <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="buttonFilter"
+                Click="buttonFilter_Click"
+                Background="Black">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Filter"></materialDesign:PackIcon>
+            </Button>
+
+            <Button
+                Visibility="Collapsed"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="buttonCloseFilter"
+                Click="buttonCloseFilter_Click"
+                Background="Red">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Close"></materialDesign:PackIcon>
+            </Button>
+
+
             <!--Reload-->
             <Button
                 HorizontalAlignment="Stretch"
@@ -101,18 +108,20 @@
                 Name="buttonDelete"
                 Click="buttonDelete_Click"
                 Background="Black">
-                <materialDesign:PackIcon Kind="Delete"></materialDesign:PackIcon>
+                <materialDesign:PackIcon Name="iconDelete"  Kind="Delete"></materialDesign:PackIcon>
             </Button>
-            <!--Update-->
+
             <Button
+                Visibility="Collapsed"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Width="50"
-                Name="buttonUpdate"
-                Click="buttonUpdate_Click"
-                Background="Black">
-                <materialDesign:PackIcon Kind="Pen"></materialDesign:PackIcon>
+                Name="closeDelete"
+                Click="buttoncloseDelete_Click"
+                Background="Red">
+                <materialDesign:PackIcon Kind="Close"></materialDesign:PackIcon>
             </Button>
+            
         </StackPanel>
 
 
@@ -143,7 +152,7 @@
                 <!--Checkbox-->
                 <DataGridTemplateColumn
                     Width="80"
-                    Visibility="Visible">
+                    Visibility="Collapsed">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <CheckBox

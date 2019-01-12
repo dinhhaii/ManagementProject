@@ -5,8 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Management_Application.ViewProducts"
         mc:Ignorable="d"
-        Title="UpdateProduct" Height="450" Width="800">
+        Title="Update Product" 
+        Height="500" Width="500"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Top="150" Left="150" >
+
     <Grid>
-        
+        <StackPanel>
+            <!--PICTURE-->
+            <Grid Margin="0,20,0,0" Height="150" Width="150">
+                <Border BorderThickness="3" BorderBrush="Wheat">
+                    <Image Name="imageProduct" Source="/Resource/noimage.png" Height="150" Width="150"></Image>
+                </Border>
+            </Grid>
+            <Button Content="Choose Image" Width="150" Margin="0,10,0,20"></Button>
+
+            <!--ID-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="ID Product :"></TextBlock>
+                <TextBox Name="txtboxID" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--NAME-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Name :"></TextBlock>
+                <TextBox Name="txtboxName" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--Amount-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Amount :"></TextBlock>
+                <TextBox Name="txtboxAmount" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--Price-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Price :"></TextBlock>
+                <TextBox Name="txtboxPrice" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--Category-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Category :"></TextBlock>
+                <ComboBox VerticalAlignment="Center" 
+                          Grid.Column="1" 
+                          Name="comboboxCategory"
+                          DisplayMemberPath="NameCategory">
+                </ComboBox>
+            </Grid>
+
+            <!--Date-->
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Date :"></TextBlock>
+                <DatePicker Name="datepickerDateEntry" Grid.Column="1"></DatePicker>
+            </Grid>
+        </StackPanel>
+
+        <Grid Height="70" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Click="ButtonSave_Click" Height="60" Width="200" FontSize="20" Content="Update" VerticalAlignment="Center" Grid.Column="0"></Button>
+            <Button Click="ButtonCancel_Click" Height="60" Width="200" FontSize="20" Content="Cancel" VerticalAlignment="Center" Grid.Column="1"></Button>
+        </Grid>
     </Grid>
 </Window>

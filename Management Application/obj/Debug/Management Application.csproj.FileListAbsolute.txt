@@ -36,3 +36,57 @@ C:\Users\DINH HAI\Desktop\ManagementProject\Management Application\obj\Debug\Man
 C:\Users\DINH HAI\Desktop\ManagementProject\Management Application\obj\Debug\Management Application.csproj.CopyComplete
 C:\Users\DINH HAI\Desktop\ManagementProject\Management Application\obj\Debug\Management Application.exe
 C:\Users\DINH HAI\Desktop\ManagementProject\Management Application\obj\Debug\Management Application.pdb
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\Management Application.exe.config
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\Management Application.exe
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\Management Application.pdb
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\Dragablz.dll
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\EntityFramework.dll
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\MaterialDesignColors.dll
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\Dragablz.pdb
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\Dragablz.xml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\EntityFramework.xml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Home.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Login.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\Import.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\AddProduct.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\Products.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\UpdateProduct.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\App.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application_Content.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application_MarkupCompile.cache
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application_MarkupCompile.lref
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\App.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Home.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Login.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\Import.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\AddProduct.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\Products.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\UpdateProduct.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.g.resources
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management_Application.Properties.Resources.resources
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.csproj.GenerateResource.cache
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.csproj.CoreCompileInputs.cache
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.csproj.CopyComplete
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.exe
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.pdb
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\Management Application.csprojAssemblyReference.cache
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\FilterProduct.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewProducts\FilterProduct.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\AddCustomer.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\Customers.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\FilterCustomer.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\UpdateCustomer.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\AddCustomer.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\Customers.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\FilterCustomer.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewCustomer\UpdateCustomer.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\FilterImport.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\UpdateImport.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\FilterImport.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\UpdateImport.baml

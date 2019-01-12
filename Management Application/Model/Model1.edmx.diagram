@@ -4,15 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5f1699b47c19455381f5de4a58785d39" Name="Diagram1">
-        <EntityTypeShape EntityType="ManagementDBModel.Category" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.Customer" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.Input" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.Output" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.Product" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.StatisticDate" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.Status" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManagementDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="7.25" IsExpanded="true" />
+      <Diagram DiagramId="cb61d8baf00841dc8dae86ae4b726428" Name="Diagram1">
+        <EntityTypeShape EntityType="ManagementDBModel.Category" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.Customer" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.Input" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.Output" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.Product" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.StatisticDate" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.Status" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ManagementDBModel.FK_Input_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementDBModel.FK_Output_Category" ManuallyRouted="false" />
         <AssociationConnector Association="ManagementDBModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="ManagementDBModel.FK_Output_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="ManagementDBModel.FK_Input_Product" ManuallyRouted="false" />

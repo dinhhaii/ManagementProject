@@ -1,0 +1,130 @@
+﻿<Window x:Class="Management_Application.ViewProducts.FilterProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Management_Application.ViewProducts"
+        mc:Ignorable="d"
+        Title="Filter Product" 
+        Height="450" Width="600"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Top="150" Left="150" >
+
+    <Grid>
+        <StackPanel Margin="0,50,0,0">
+            <!--ID-->
+            <Grid Width="500" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="ID Product :"></TextBlock>
+                <TextBox Name="txtboxID" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--NAME-->
+            <Grid Width="500" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Name :"></TextBlock>
+                <TextBox Name="txtboxName" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--Price-->
+            <Grid Width="500">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
+                    <TextBlock Text="0 - "></TextBlock> 
+                    <TextBlock Text="{Binding Path=Value, ElementName=slider}"></TextBlock>
+                    <TextBlock Text=" VNĐ"></TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid Width="500" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Price :" Margin="0,17"></TextBlock>
+
+                <Slider 
+                    Name="slider"
+                    Grid.Column="1"
+                    Value="0" Orientation="Horizontal" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    IsSnapToTickEnabled="True" 
+                    Maximum="5000000" 
+                    TickPlacement="BottomRight" 
+                    AutoToolTipPlacement="BottomRight" 
+                    AutoToolTipPrecision="2" 
+                    Ticks="0,500000,1000000,1500000,2000000,2500000,3000000,3500000,4000000,4500000,5000000">
+                </Slider>
+            </Grid>
+            <Grid Width="500">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Text="0 VNĐ" Grid.Column="1"></TextBlock>
+                <TextBlock HorizontalAlignment="Right" Text="5.000.000 VNĐ" Grid.Column="1"></TextBlock>
+            </Grid>
+
+            <!--Category-->
+            <Grid Width="500" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Category :"></TextBlock>
+                <ComboBox VerticalAlignment="Center" 
+                          Grid.Column="1" 
+                          Name="comboboxCategory"
+                          DisplayMemberPath="NameCategory">
+                </ComboBox>
+            </Grid>
+
+            <!--Date--><!--
+            <Grid Width="500" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="Date From :"></TextBlock>
+                <DatePicker Name="datepickerFrom" Grid.Column="1"></DatePicker>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Date To:" Grid.Column="2"></TextBlock>
+                <DatePicker Name="datepickerTo" Grid.Column="3"></DatePicker>
+            </Grid>-->
+
+        </StackPanel>
+
+        <Grid Height="70" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Click="ButtonSave_Click" Height="60" Width="200" FontSize="20" Content="Filter" VerticalAlignment="Center" Grid.Column="0"></Button>
+            <Button Click="ButtonCancel_Click" Height="60" Width="200" FontSize="20" Content="Cancel" VerticalAlignment="Center" Grid.Column="1"></Button>
+        </Grid>
+    </Grid>
+</Window>

@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewProduct="clr-namespace:Management_Application.ViewProducts"
+        xmlns:viewImport="clr-namespace:Management_Application.ViewImport"
+        xmlns:viewCustomer="clr-namespace:Management_Application.ViewCustomer"
 
         xmlns:local="clr-namespace:Management_Application"
         mc:Ignorable="d"
         x:Name="MyHome"
         Top="100" Left="100" 
-        Title="Home" Height="480" Width="880"
+        Title="Home" Height="600" Width="880"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -68,7 +70,7 @@
                             <Label Grid.Column="1" HorizontalAlignment="Left">Import</Label>
                         </Grid>
                     </TabItem.Header>
-
+                    <viewImport:Import></viewImport:Import>
                 </TabItem>
 
                 <TabItem>
@@ -82,7 +84,7 @@
                             <Label Grid.Column="1" HorizontalAlignment="Left" FontSize="10">Customer</Label>
                         </Grid>
                     </TabItem.Header>
-                    
+                    <viewCustomer:Customers></viewCustomer:Customers>
                 </TabItem>
                 
                 <TabItem>
