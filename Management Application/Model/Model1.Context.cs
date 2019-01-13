@@ -28,6 +28,7 @@ namespace Management_Application.Model
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Input> Inputs { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Output> Outputs { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<StatisticDate> StatisticDates { get; set; }

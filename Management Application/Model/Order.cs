@@ -12,18 +12,24 @@ namespace Management_Application.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Status
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Status()
+        public Order()
         {
-            this.Orders = new HashSet<Order>();
+            this.Outputs = new HashSet<Output>();
         }
     
+        public int IDOrder { get; set; }
+        public string IDCustomer { get; set; }
+        public Nullable<int> Discount { get; set; }
+        public System.DateTime DateSale { get; set; }
+        public Nullable<float> Deposite { get; set; }
         public int IDStatus { get; set; }
-        public string Status1 { get; set; }
     
+        public virtual Customer Customer { get; set; }
+        public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Output> Outputs { get; set; }
     }
 }

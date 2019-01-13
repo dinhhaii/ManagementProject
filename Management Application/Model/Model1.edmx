@@ -34,21 +34,29 @@
           <Property Name="Price" Type="real" />
           <Property Name="IDCategory" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int" Nullable="false" />
+          <Property Name="IDCustomer" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="DateSale" Type="datetime" Nullable="false" />
+          <Property Name="Deposite" Type="real" />
+          <Property Name="IDStatus" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Output">
           <Key>
             <PropertyRef Name="IDProduct" />
-            <PropertyRef Name="Serial" />
+            <PropertyRef Name="IDOrder" />
           </Key>
           <Property Name="IDProduct" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateSale" Type="datetime" />
-          <Property Name="Serial" Type="int" Nullable="false" />
-          <Property Name="Discount" Type="int" />
-          <Property Name="StatusID" Type="int" />
-          <Property Name="Deposit" Type="real" />
-          <Property Name="IDCustomer" Type="nchar" MaxLength="10" />
+          <Property Name="IDOrder" Type="int" Nullable="false" />
           <Property Name="Amount" Type="int" />
           <Property Name="IDCategory" Type="nchar" MaxLength="10" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="Price" Type="real" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -111,6 +119,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="IDCustomer" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IDStatus" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IDStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Output_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Output" Type="Self.Output" Multiplicity="*" />
@@ -123,15 +155,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Output_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+        <Association Name="FK_Output_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="Output" Type="Self.Output" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="IDCustomer" />
+            <Principal Role="Order">
+              <PropertyRef Name="IDOrder" />
             </Principal>
             <Dependent Role="Output">
-              <PropertyRef Name="IDCustomer" />
+              <PropertyRef Name="IDOrder" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -144,18 +176,6 @@
             </Principal>
             <Dependent Role="Output">
               <PropertyRef Name="IDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Output_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
-          <End Role="Output" Type="Self.Output" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="IDStatus" />
-            </Principal>
-            <Dependent Role="Output">
-              <PropertyRef Name="StatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -175,6 +195,7 @@
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Input" EntityType="Self.Input" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Output" EntityType="Self.Output" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatisticDate" EntityType="Self.StatisticDate" Schema="dbo" store:Type="Tables" />
@@ -188,20 +209,24 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Input" EntitySet="Input" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_Output_Category" Association="Self.FK_Output_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Output" EntitySet="Output" />
           </AssociationSet>
-          <AssociationSet Name="FK_Output_Customer" Association="Self.FK_Output_Customer">
-            <End Role="Customer" EntitySet="Customer" />
+          <AssociationSet Name="FK_Output_Order" Association="Self.FK_Output_Order">
+            <End Role="Order" EntitySet="Order" />
             <End Role="Output" EntitySet="Output" />
           </AssociationSet>
           <AssociationSet Name="FK_Output_Product" Association="Self.FK_Output_Product">
             <End Role="Product" EntitySet="Product" />
-            <End Role="Output" EntitySet="Output" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Output_Status" Association="Self.FK_Output_Status">
-            <End Role="Status" EntitySet="Status" />
             <End Role="Output" EntitySet="Output" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
@@ -232,7 +257,7 @@
           <Property Name="NameCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Customer" FromRole="Customer" ToRole="Output" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Input">
           <Key>
@@ -249,25 +274,35 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_Input_Category" FromRole="Input" ToRole="Category" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Input_Product" FromRole="Input" ToRole="Product" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
+          <Property Name="IDCustomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="DateSale" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Deposite" Type="Single" />
+          <Property Name="IDStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Order_Status" FromRole="Order" ToRole="Status" />
+          <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Order" FromRole="Order" ToRole="Output" />
+        </EntityType>
         <EntityType Name="Output">
           <Key>
             <PropertyRef Name="IDProduct" />
-            <PropertyRef Name="Serial" />
+            <PropertyRef Name="IDOrder" />
           </Key>
           <Property Name="IDProduct" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateSale" Type="DateTime" Precision="3" />
-          <Property Name="Serial" Type="Int32" Nullable="false" />
-          <Property Name="Discount" Type="Int32" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="Deposit" Type="Single" />
-          <Property Name="IDCustomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Int32" />
           <Property Name="IDCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="Price" Type="Single" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Output_Category" FromRole="Output" ToRole="Category" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Output_Customer" FromRole="Output" ToRole="Customer" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Output_Order" FromRole="Output" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Output_Product" FromRole="Output" ToRole="Product" />
-          <NavigationProperty Name="Status" Relationship="Self.FK_Output_Status" FromRole="Output" ToRole="Status" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -298,7 +333,7 @@
           </Key>
           <Property Name="IDStatus" Type="Int32" Nullable="false" />
           <Property Name="Status1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Status" FromRole="Status" ToRole="Output" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Status" FromRole="Status" ToRole="Order" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -346,14 +381,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Output_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Output" Type="Self.Output" Multiplicity="*" />
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="IDCustomer" />
             </Principal>
-            <Dependent Role="Output">
+            <Dependent Role="Order">
               <PropertyRef Name="IDCustomer" />
             </Dependent>
           </ReferentialConstraint>
@@ -370,6 +405,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IDStatus" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IDStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Output_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Output" Type="Self.Output" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Output">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Output_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Output" Type="Self.Output" Multiplicity="*" />
@@ -382,22 +441,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Output_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
-          <End Role="Output" Type="Self.Output" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="IDStatus" />
-            </Principal>
-            <Dependent Role="Output">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ManagementDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Inputs" EntityType="Self.Input" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Outputs" EntityType="Self.Output" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="StatisticDates" EntityType="Self.StatisticDate" />
@@ -415,20 +463,24 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_Output_Customer" Association="Self.FK_Output_Customer">
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
             <End Role="Customer" EntitySet="Customers" />
-            <End Role="Output" EntitySet="Outputs" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Input_Product" Association="Self.FK_Input_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="Input" EntitySet="Inputs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Output_Product" Association="Self.FK_Output_Product">
-            <End Role="Product" EntitySet="Products" />
+          <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Output_Order" Association="Self.FK_Output_Order">
+            <End Role="Order" EntitySet="Orders" />
             <End Role="Output" EntitySet="Outputs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Output_Status" Association="Self.FK_Output_Status">
-            <End Role="Status" EntitySet="Status" />
+          <AssociationSet Name="FK_Output_Product" Association="Self.FK_Output_Product">
+            <End Role="Product" EntitySet="Products" />
             <End Role="Output" EntitySet="Outputs" />
           </AssociationSet>
         </EntityContainer>
@@ -469,19 +521,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ManagementDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="DateSale" ColumnName="DateSale" />
+                <ScalarProperty Name="Deposite" ColumnName="Deposite" />
+                <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Outputs">
             <EntityTypeMapping TypeName="ManagementDBModel.Output">
               <MappingFragment StoreEntitySet="Output">
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DateSale" ColumnName="DateSale" />
-                <ScalarProperty Name="Serial" ColumnName="Serial" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

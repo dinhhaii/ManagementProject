@@ -79,7 +79,7 @@ namespace Management_Application.ViewProducts
             if (togglebtnNewProduct.IsChecked == true)
             {
                 //Add Input
-                input.Serial = listInput.Count;
+                input.Serial = listInput.Count+1;
                 input.IDProduct = txtboxID.Text;
                 input.Name = txtboxName.Text;
                 input.Category = comboboxCategory.SelectedItem as Category;
@@ -145,7 +145,7 @@ namespace Management_Application.ViewProducts
                     }
 
                     //Add Input
-                    input.Serial = listInput.Count;
+                    input.Serial = listInput.Count+1;
                     input.IDProduct = product.IDProduct;
                     input.Name = product.Name;
                     input.Category = comboboxCategory.SelectedItem as Category;

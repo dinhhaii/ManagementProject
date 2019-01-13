@@ -6,6 +6,7 @@
         xmlns:viewProduct="clr-namespace:Management_Application.ViewProducts"
         xmlns:viewImport="clr-namespace:Management_Application.ViewImport"
         xmlns:viewCustomer="clr-namespace:Management_Application.ViewCustomer"
+        xmlns:viewSales="clr-namespace:Management_Application.ViewSales"
 
         xmlns:local="clr-namespace:Management_Application"
         mc:Ignorable="d"
@@ -57,7 +58,7 @@
                             <Label Grid.Column="1" HorizontalAlignment="Left">Sales</Label>
                         </Grid>
                     </TabItem.Header>
-                    
+                    <viewSales:Sales></viewSales:Sales>
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>

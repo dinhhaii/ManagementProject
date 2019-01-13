@@ -16,18 +16,14 @@ namespace Management_Application.Model
     {
         public string IDProduct { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> DateSale { get; set; }
-        public int Serial { get; set; }
-        public Nullable<int> Discount { get; set; }
-        public Nullable<int> StatusID { get; set; }
-        public Nullable<float> Deposit { get; set; }
-        public string IDCustomer { get; set; }
+        public int IDOrder { get; set; }
         public Nullable<int> Amount { get; set; }
         public string IDCategory { get; set; }
+        public Nullable<int> Discount { get; set; }
+        public Nullable<float> Price { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
-        public virtual Status Status { get; set; }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\App.xaml
-131232318582
+141544693623
 2-1556844510
-30904250380
+32-2117391519
 211323227950
-Home.xaml;Login.xaml;ViewCustomer\AddCustomer.xaml;ViewCustomer\Customers.xaml;ViewCustomer\FilterCustomer.xaml;ViewCustomer\UpdateCustomer.xaml;ViewImport\FilterImport.xaml;ViewImport\Import.xaml;ViewImport\UpdateImport.xaml;ViewProducts\AddProduct.xaml;ViewProducts\FilterProduct.xaml;ViewProducts\Products.xaml;ViewProducts\UpdateProduct.xaml;
+Home.xaml;Login.xaml;ViewCustomer\AddCustomer.xaml;ViewCustomer\Customers.xaml;ViewCustomer\FilterCustomer.xaml;ViewCustomer\UpdateCustomer.xaml;ViewImport\FilterImport.xaml;ViewImport\Import.xaml;ViewImport\UpdateImport.xaml;ViewProducts\AddProduct.xaml;ViewProducts\FilterProduct.xaml;ViewProducts\Products.xaml;ViewProducts\UpdateProduct.xaml;ViewSales\Sales.xaml;
 
 False
 

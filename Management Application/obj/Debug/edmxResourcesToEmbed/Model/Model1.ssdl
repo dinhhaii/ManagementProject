@@ -29,21 +29,29 @@
     <Property Name="Price" Type="real" />
     <Property Name="IDCategory" Type="nchar" MaxLength="10" />
   </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="IDOrder" />
+    </Key>
+    <Property Name="IDOrder" Type="int" Nullable="false" />
+    <Property Name="IDCustomer" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="DateSale" Type="datetime" Nullable="false" />
+    <Property Name="Deposite" Type="real" />
+    <Property Name="IDStatus" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Output">
     <Key>
       <PropertyRef Name="IDProduct" />
-      <PropertyRef Name="Serial" />
+      <PropertyRef Name="IDOrder" />
     </Key>
     <Property Name="IDProduct" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateSale" Type="datetime" />
-    <Property Name="Serial" Type="int" Nullable="false" />
-    <Property Name="Discount" Type="int" />
-    <Property Name="StatusID" Type="int" />
-    <Property Name="Deposit" Type="real" />
-    <Property Name="IDCustomer" Type="nchar" MaxLength="10" />
+    <Property Name="IDOrder" Type="int" Nullable="false" />
     <Property Name="Amount" Type="int" />
     <Property Name="IDCategory" Type="nchar" MaxLength="10" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="Price" Type="real" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -106,6 +114,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Order_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IDCustomer" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IDCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="IDStatus" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IDStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Output_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Output" Type="Self.Output" Multiplicity="*" />
@@ -118,15 +150,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Output_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+  <Association Name="FK_Output_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
     <End Role="Output" Type="Self.Output" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="IDCustomer" />
+      <Principal Role="Order">
+        <PropertyRef Name="IDOrder" />
       </Principal>
       <Dependent Role="Output">
-        <PropertyRef Name="IDCustomer" />
+        <PropertyRef Name="IDOrder" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -139,18 +171,6 @@
       </Principal>
       <Dependent Role="Output">
         <PropertyRef Name="IDProduct" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Output_Status">
-    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
-    <End Role="Output" Type="Self.Output" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Status">
-        <PropertyRef Name="IDStatus" />
-      </Principal>
-      <Dependent Role="Output">
-        <PropertyRef Name="StatusID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -170,6 +190,7 @@
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Input" EntityType="Self.Input" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Output" EntityType="Self.Output" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StatisticDate" EntityType="Self.StatisticDate" Schema="dbo" store:Type="Tables" />
@@ -183,20 +204,24 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="Input" EntitySet="Input" />
     </AssociationSet>
+    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
     <AssociationSet Name="FK_Output_Category" Association="Self.FK_Output_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Output" EntitySet="Output" />
     </AssociationSet>
-    <AssociationSet Name="FK_Output_Customer" Association="Self.FK_Output_Customer">
-      <End Role="Customer" EntitySet="Customer" />
+    <AssociationSet Name="FK_Output_Order" Association="Self.FK_Output_Order">
+      <End Role="Order" EntitySet="Order" />
       <End Role="Output" EntitySet="Output" />
     </AssociationSet>
     <AssociationSet Name="FK_Output_Product" Association="Self.FK_Output_Product">
       <End Role="Product" EntitySet="Product" />
-      <End Role="Output" EntitySet="Output" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Output_Status" Association="Self.FK_Output_Status">
-      <End Role="Status" EntitySet="Status" />
       <End Role="Output" EntitySet="Output" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">

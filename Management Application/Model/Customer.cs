@@ -17,7 +17,7 @@ namespace Management_Application.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Outputs = new HashSet<Output>();
+            this.Orders = new HashSet<Order>();
         }
     
         public string IDCustomer { get; set; }
@@ -25,8 +25,7 @@ namespace Management_Application.Model
         public string Phone { get; set; }
         public string Address { get; set; }
         public bool isSelected { get; set; }
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Output> Outputs { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -32,19 +32,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="ManagementDBModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+          <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="DateSale" ColumnName="DateSale" />
+          <ScalarProperty Name="Deposite" ColumnName="Deposite" />
+          <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Outputs">
       <EntityTypeMapping TypeName="ManagementDBModel.Output">
         <MappingFragment StoreEntitySet="Output">
           <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DateSale" ColumnName="DateSale" />
-          <ScalarProperty Name="Serial" ColumnName="Serial" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-          <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+          <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

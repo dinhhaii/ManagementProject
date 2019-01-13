@@ -90,3 +90,5 @@ C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Deb
 C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\UpdateImport.g.cs
 C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\FilterImport.baml
 C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewImport\UpdateImport.baml
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewSales\Sales.g.cs
+C:\Users\DINH HAI\Desktop\ManagementProject-Clone\Management Application\obj\Debug\ViewSales\Sales.baml
