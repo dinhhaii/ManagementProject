@@ -36,9 +36,10 @@
     <Property Name="IDOrder" Type="int" Nullable="false" />
     <Property Name="IDCustomer" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Discount" Type="int" />
-    <Property Name="DateSale" Type="datetime" Nullable="false" />
+    <Property Name="DateSale" Type="datetime" />
     <Property Name="Deposite" Type="real" />
     <Property Name="IDStatus" Type="int" Nullable="false" />
+    <Property Name="TotalItem" Type="real" />
   </EntityType>
   <EntityType Name="Output">
     <Key>
@@ -78,7 +79,7 @@
       <PropertyRef Name="IDStatus" />
     </Key>
     <Property Name="IDStatus" Type="int" Nullable="false" />
-    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="NameStatus" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

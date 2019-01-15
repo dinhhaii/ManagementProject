@@ -1,0 +1,67 @@
+﻿<Window x:Class="Management_Application.ViewSales.AddDiscount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Management_Application.ViewSales"
+        mc:Ignorable="d"
+        Title="Discount"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="20"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Top="150" Left="150" Width="400" Height="350">
+
+    <Grid>
+        
+        <StackPanel Margin="20">
+            <!--ID-->
+            <Grid Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="ID Product :"></TextBlock>
+                <TextBox Name="txtboxID" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--NAME-->
+            <Grid Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Name :"></TextBlock>
+                <TextBox Name="txtboxName" VerticalAlignment="Center" Grid.Column="1"></TextBox>
+            </Grid>
+
+            <!--Discount-->
+            <Grid Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Text="Discount :"></TextBlock>
+                <ComboBox Name="comboboxDiscount" Grid.Column="1"></ComboBox>
+            </Grid>
+        </StackPanel>
+
+        <Grid Height="70" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Click="ButtonSave_Click"  Height="50" Width="150" FontSize="20" Content="OK" VerticalAlignment="Center" Grid.Column="0"></Button>
+            <Button Click="ButtonCancel_Click"  Height="50" Width="150" FontSize="20" Content="Cancel" VerticalAlignment="Center" Grid.Column="1"></Button>
+        </Grid>
+    </Grid>
+</Window>

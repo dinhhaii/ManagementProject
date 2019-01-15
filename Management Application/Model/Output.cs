@@ -21,7 +21,8 @@ namespace Management_Application.Model
         public string IDCategory { get; set; }
         public Nullable<int> Discount { get; set; }
         public Nullable<float> Price { get; set; }
-    
+        public bool isSelected { get; set; }
+
         public virtual Category Category { get; set; }
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

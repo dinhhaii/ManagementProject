@@ -1,0 +1,231 @@
+﻿<Window x:Class="Management_Application.ViewSales.Orders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Management_Application.ViewSales"
+        mc:Ignorable="d"
+        Title="Orders"
+        Height="400" Width="830"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="10"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Top="150" Left="150">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style x:Key="MyDataGridCell" TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            </Style>
+        </Grid.Resources>
+
+        <!--=========================SEARCH=========================-->
+        <TextBox 
+            Name="txtboxSearch"
+            TextChanged="txtboxSearch_TextChanged"
+            HorizontalAlignment="Left"
+            Margin="20,0,0,0" 
+            Width="200" 
+            materialDesign:HintAssist.Hint="Search by Order Name/ID/Category" 
+            VerticalAlignment="Center">
+        </TextBox>
+        <Button
+            Name="buttonSearch"
+            Click="buttonSearch_Click"
+            Margin="180,0,0,0"
+            HorizontalAlignment="Left"
+            Width="50"
+            Background="Transparent"
+            BorderBrush="Transparent">
+            <materialDesign:PackIcon Name="iconSearch" Kind="Search"></materialDesign:PackIcon>
+        </Button>
+
+        <!--=========================BUTTON DELETE/RELOAD/FILTER/ADD=========================-->
+        <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center">
+            <!--Filter-->
+            <Button
+                Visibility="Collapsed"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="buttonFilter"
+                Click="buttonFilter_Click"
+                Background="Black">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Filter"></materialDesign:PackIcon>
+            </Button>
+
+            <Button
+                Visibility="Collapsed"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="buttonCloseFilter"
+                Click="buttonCloseFilter_Click"
+                Background="Red">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Close"></materialDesign:PackIcon>
+            </Button>
+
+
+            <!--Reload-->
+            <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="buttonReload"
+                Click="buttonReload_Click"
+                Background="Black">
+                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Reload"></materialDesign:PackIcon>
+            </Button>
+            
+            <!--Delete-->
+            <Button
+
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="buttonDelete"
+                Click="buttonDelete_Click"
+                Background="Black">
+                <materialDesign:PackIcon Name="iconDelete"  Kind="Delete"></materialDesign:PackIcon>
+            </Button>
+
+            <Button
+                Visibility="Collapsed"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="50"
+                Name="closeDelete"
+                Click="buttoncloseDelete_Click"
+                Background="Red">
+                <materialDesign:PackIcon Kind="Close"></materialDesign:PackIcon>
+            </Button>
+
+        </StackPanel>
+
+
+        <!--=========================DATAGRID=========================-->
+        <DataGrid
+            Name="dataGridOrder"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ColumnWidth="*"
+            CanUserSortColumns="True"
+            CanUserAddRows="True"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="False"
+            CellStyle="{StaticResource MyDataGridCell}">
+
+            <!--HEADER STYLE-->
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                    <Setter Property="Height" Value="40"></Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.Columns>
+                <!--Checkbox-->
+                <DataGridTemplateColumn
+                    Width="80"
+                    Visibility="Collapsed">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Name="checkBoxDeleteAll"
+                                Checked="checkBoxDeleteAll_CheckedUnChecked"
+                                Unchecked="checkBoxDeleteAll_CheckedUnChecked"
+                                HorizontalAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                x:Name="checkBoxDelete"
+                                HorizontalAlignment="Center"
+                                IsChecked="{Binding isSelected, Mode=TwoWay}"
+                                Checked="checkBoxDelete_CheckedUnChecked"
+                                Unchecked="checkBoxDelete_CheckedUnChecked"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--IDOrder-->
+                <DataGridTextColumn
+                    Width="50"
+                    Header="ID"
+                    Binding="{Binding IDOrder}">
+                </DataGridTextColumn>
+                
+                <!--IDCustomer-->
+                <DataGridTextColumn
+                    Width="150"
+                    Header="Customer"
+                    Binding="{Binding Customer.NameCustomer}">
+                </DataGridTextColumn>
+                <!--Discount-->
+                <DataGridTextColumn
+                    Width="80"
+                    Header="Discount (%)"
+                    Binding="{Binding Discount}">
+                </DataGridTextColumn>
+                <!--DateSale-->
+                <DataGridTextColumn
+                    Width="150"
+                    Header="Date Sale"
+                    Binding="{Binding DateSale}">
+                </DataGridTextColumn>
+                <!--Deposite-->
+                <DataGridTextColumn
+                    Width="120"
+                    Header="Deposite"
+                    Binding="{Binding Deposite}">
+                </DataGridTextColumn>
+                <!--Status-->
+                <DataGridTextColumn
+                    Width="120"
+                    Header="Status"
+                    Binding="{Binding Status.NameStatus}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="Done">
+                                    <Setter Property="Background" Value="Red"></Setter>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Processing">
+                                    <Setter Property="Background" Value="Green"></Setter>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Stacked">
+                                    <Setter Property="Background" Value="Blue"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!--Total-->
+                <DataGridTextColumn
+                    Width="120"
+                    Header="Total (VNĐ)"
+                    Binding="{Binding TotalItem}">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

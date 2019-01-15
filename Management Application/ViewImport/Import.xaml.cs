@@ -164,24 +164,22 @@ namespace Management_Application.ViewImport
         {
             if (isDeleted == true)
             {
-                foreach (Input item in listInputs)
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Inputs?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
+                if (result == MessageBoxResult.Yes)
                 {
-                    if (item != null && item.isSelected == true)
+                    for (int i = 0;i<listInputs.Count;i++)
                     {
-                        MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Inputs?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
-                        if (result == MessageBoxResult.Yes)
+                        if (listInputs[i] != null && listInputs[i].isSelected == true)
                         {
                             //Remove input data
-                            DataProvider.ins.db.Inputs.Remove(item);
+                            DataProvider.ins.db.Inputs.Remove(listInputs[i]);
                             //Update product data
-                            Product itemUpdate = DataProvider.ins.db.Products.Find(item.IDProduct);
-                            itemUpdate.Amount -= item.Amount;
+                            Product itemUpdate = DataProvider.ins.db.Products.Find(listInputs[i].IDProduct);
+                            itemUpdate.Amount -= listInputs[i].Amount;
 
                             DataProvider.ins.db.SaveChanges();
                             MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
-                            reloadData();
                         }
-                        break;
                     }
                 }
             }
@@ -195,6 +193,7 @@ namespace Management_Application.ViewImport
                 buttonDelete.Background = Brushes.Red;
                 dataGridInput.Columns[0].Visibility = Visibility.Visible;
             }
+            reloadData();
         }
 
         private void buttoncloseDelete_Click(object sender, RoutedEventArgs e)

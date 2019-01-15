@@ -41,6 +41,7 @@
           <ScalarProperty Name="DateSale" ColumnName="DateSale" />
           <ScalarProperty Name="Deposite" ColumnName="Deposite" />
           <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
+          <ScalarProperty Name="TotalItem" ColumnName="TotalItem" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -83,7 +84,7 @@
       <EntityTypeMapping TypeName="ManagementDBModel.Status">
         <MappingFragment StoreEntitySet="Status">
           <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
-          <ScalarProperty Name="Status1" ColumnName="Status" />
+          <ScalarProperty Name="NameStatus" ColumnName="NameStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

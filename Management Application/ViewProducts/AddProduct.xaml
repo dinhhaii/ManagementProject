@@ -78,11 +78,44 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock VerticalAlignment="Center" Text="Category :"></TextBlock>
-                <ComboBox VerticalAlignment="Center" 
-                          Grid.Column="1" 
-                          Name="comboboxCategory"
-                          DisplayMemberPath="NameCategory">
-                </ComboBox>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"                      
+                        Name="comboboxCategory">
+                        
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel 
+                                    Orientation="Horizontal">
+                                    <TextBlock Width="150" VerticalAlignment="Center" Text="{Binding NameCategory}"></TextBlock>
+                                    <Button
+                                        HorizontalAlignment="Left"
+                                        Width="50"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Click="ButtonDeleteCategory_Click">
+                                        <materialDesign:PackIcon Kind="Close"></materialDesign:PackIcon>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        Width="50"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Click="ButtonAddCategory_Click">
+                        <materialDesign:PackIcon Kind="Plus"></materialDesign:PackIcon>
+                    </Button>
+                </Grid>
+                
             </Grid>
             
             <!--Price-->

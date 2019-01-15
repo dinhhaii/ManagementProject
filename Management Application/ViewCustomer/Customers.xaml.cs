@@ -173,21 +173,20 @@ namespace Management_Application.ViewCustomer
         //DELETE
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
+            bool deletesuccess = false;
             if (isDeleted == true)
             {
-                foreach (Customer item in listCustomers)
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Customers?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
+                if (result == MessageBoxResult.Yes)
                 {
-                    if (item != null && item.isSelected == true)
+                    for(int i =0;i<listCustomers.Count;i++)
                     {
-                        MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Customers?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
-                        if (result == MessageBoxResult.Yes)
+                        if (listCustomers[i] != null && listCustomers[i].isSelected == true)
                         {
-                            DataProvider.ins.db.Customers.Remove(item);
+                            DataProvider.ins.db.Customers.Remove(listCustomers[i]);
                             DataProvider.ins.db.SaveChanges();
-                            MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
-                            reloadData();
+                            deletesuccess = false;
                         }
-                        break;
                     }
                 }
             }
@@ -202,6 +201,11 @@ namespace Management_Application.ViewCustomer
                 buttonDelete.Background = Brushes.Red;
                 dataGridCustomer.Columns[0].Visibility = Visibility.Visible;
             }
+            if (deletesuccess)
+            {
+                MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            reloadData();
         }
 
         private void buttoncloseDelete_Click(object sender, RoutedEventArgs e)

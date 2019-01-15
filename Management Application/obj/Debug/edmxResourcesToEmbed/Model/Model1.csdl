@@ -42,9 +42,10 @@
     <Property Name="IDOrder" Type="Int32" Nullable="false" />
     <Property Name="IDCustomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Discount" Type="Int32" />
-    <Property Name="DateSale" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateSale" Type="DateTime" Precision="3" />
     <Property Name="Deposite" Type="Single" />
     <Property Name="IDStatus" Type="Int32" Nullable="false" />
+    <Property Name="TotalItem" Type="Single" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="Status" Relationship="Self.FK_Order_Status" FromRole="Order" ToRole="Status" />
     <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Order" FromRole="Order" ToRole="Output" />
@@ -93,7 +94,7 @@
       <PropertyRef Name="IDStatus" />
     </Key>
     <Property Name="IDStatus" Type="Int32" Nullable="false" />
-    <Property Name="Status1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NameStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Status" FromRole="Status" ToRole="Order" />
   </EntityType>
   <EntityType Name="sysdiagram">

@@ -175,22 +175,28 @@ namespace Management_Application.ViewProducts
         {
             if (isDeleted == true)
             {
-                foreach (Product item in listProducts)
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Products?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
+                if (result == MessageBoxResult.Yes)
                 {
-                    if (item != null && item.isSelected == true)
+                    for (int i = 0; i < listProducts.Count; i++)
                     {
-                        MessageBoxResult result = MessageBox.Show("Are you sure you want to delete these Products?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Hand);
-                        if (result == MessageBoxResult.Yes)
+                        if (listProducts[i] != null && listProducts[i].isSelected == true)
                         {
-                            DataProvider.ins.db.Products.Remove(item);
-                            var itemInput = DataProvider.ins.db.Inputs.SingleOrDefault(x => x.IDProduct == item.IDProduct);
-                            DataProvider.ins.db.Inputs.Remove(itemInput);
+                            List<Input> listInput = DataProvider.ins.db.Inputs.ToList();
+                            DataProvider.ins.db.Products.Remove(listProducts[i]);
                             DataProvider.ins.db.SaveChanges();
-                            MessageBox.Show("Delete successfully!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
-                            reloadData();
+                            foreach (var value in listInput)
+                            {
+                                var itemInput = DataProvider.ins.db.Inputs.Find(listProducts[i].IDProduct, value.Serial);
+                                if (itemInput != null)
+                                {
+                                    DataProvider.ins.db.Inputs.Remove(itemInput);
+                                    DataProvider.ins.db.SaveChanges();
+                                }
+                            }
                         }
-                        break;
                     }
+                    reloadData();
                 }
             }
             else

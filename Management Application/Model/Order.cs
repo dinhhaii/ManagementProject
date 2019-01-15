@@ -23,10 +23,11 @@ namespace Management_Application.Model
         public int IDOrder { get; set; }
         public string IDCustomer { get; set; }
         public Nullable<int> Discount { get; set; }
-        public System.DateTime DateSale { get; set; }
+        public Nullable<System.DateTime> DateSale { get; set; }
         public Nullable<float> Deposite { get; set; }
         public int IDStatus { get; set; }
-    
+        public Nullable<float> TotalItem { get; set; }
+        public bool isSelected { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

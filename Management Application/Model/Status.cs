@@ -21,7 +21,7 @@ namespace Management_Application.Model
         }
     
         public int IDStatus { get; set; }
-        public string Status1 { get; set; }
+        public string NameStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

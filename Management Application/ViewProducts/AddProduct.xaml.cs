@@ -225,5 +225,62 @@ namespace Management_Application.ViewProducts
                 imageProduct.Source = new BitmapImage(new Uri(product.Picture, UriKind.RelativeOrAbsolute));
             }
         }
+
+
+        void reloadCategory()
+        {
+            if(listCategory != null)
+            {
+                listCategory.Clear();
+            }
+            listCategory = DataProvider.ins.db.Categories.ToList();
+            comboboxCategory.ItemsSource = null;
+            comboboxCategory.ItemsSource = listCategory;
+        }
+        private void ButtonAddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            AddCategory window = new AddCategory();
+            window.ShowDialog();
+            reloadCategory();
+        }
+
+        private void ButtonDeleteCategory_Click(object sender, RoutedEventArgs e)
+        {
+            Category category = ((FrameworkElement)sender).DataContext as Category;
+            MessageBoxResult result = MessageBox.Show("Are you sure you delete this Category?", "Management Application", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    DataProvider.ins.db.Categories.Remove(category);
+                    DataProvider.ins.db.SaveChanges();
+                    MessageBox.Show("Delete Category successfully", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
+                    reloadCategory();
+                }
+                catch
+                {
+                    MessageBox.Show("Delete Failed!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        //private void comboboxCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    Category category = comboboxCategory.SelectedItem as Category;
+        //    if (category != null)
+        //    {
+        //        for (int i = 0; i < listCategory.Count; i++)
+        //        {
+        //            ComboBoxItem row = (ComboBoxItem)comboboxCategory.ItemContainerGenerator.ContainerFromIndex(i);
+        //            if (listCategory[i].IDCategory == category.IDCategory)
+        //            {
+        //                Button btn = VisualTreeHelpers.FindChild<Button>(row);
+        //                TextBlock txtblock = VisualTreeHelpers.FindChild<TextBlock>(row);
+        //                btn.Visibility = Visibility.Collapsed;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

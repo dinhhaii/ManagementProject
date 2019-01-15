@@ -25,7 +25,6 @@ namespace Management_Application.ViewSales
         List<Product> filterProducts { get; set; }
         List<Customer> listCustomers { get; set; }
         List<Output> listOrderProducts { get; set; }
-        List<string> listCustomerName { get; set; }
 
         public Sales()
         {
@@ -42,7 +41,9 @@ namespace Management_Application.ViewSales
             reloadProduct();
 
             //ComboBox Customer
-            reloadCustomer();
+            comboboxCustomer.ItemsSource = listCustomers;
+
+
         }
 
         //===============COMBOBOX CUSTOMER==============
@@ -63,13 +64,22 @@ namespace Management_Application.ViewSales
         {
             if(comboboxCustomer.SelectedItem != null)
             {
-                string name = comboboxCustomer.SelectedItem as string;
-                Customer customer = DataProvider.ins.db.Customers.Find(name);
+                buttonCart.IsEnabled = true;
+                buttonClear.IsEnabled = true;
+                dataGridProduct.IsEnabled = true;
+
+                Customer customer = comboboxCustomer.SelectedItem as Customer;
 
                 txtblockCustomer.Visibility = Visibility.Collapsed;
                 comboboxCustomer.Visibility = Visibility.Collapsed;
                 chipCustomerName.Visibility = Visibility.Visible;
-                chipCustomerName.Content = name;
+                chipCustomerName.Content = customer.NameCustomer;
+            }
+            else
+            {
+                buttonCart.IsEnabled = false;
+                buttonClear.IsEnabled = false;
+                dataGridProduct.IsEnabled = false;
             }
         }
 
@@ -94,11 +104,15 @@ namespace Management_Application.ViewSales
             bool isAdded = false;
 
             Order order = new Order();
-            order.IDOrder = DataProvider.ins.db.Orders.Count() + 1;
+            int count = 1;
+            while(DataProvider.ins.db.Orders.Find(count) != null)
+            {
+                count++;
+            }
+            order.IDOrder = count;
             if(comboboxCustomer.SelectedItem != null)
             {
                 order.Customer = comboboxCustomer.SelectedItem as Customer;
-                order.IDCustomer = order.Customer.IDCustomer;
             }
 
             Output export = new Output();
@@ -109,7 +123,7 @@ namespace Management_Application.ViewSales
             export.IDCategory = temp.IDCategory;
             export.Discount = 0;
             export.Price = temp.Price;
-            export.IDOrder = DataProvider.ins.db.Orders.Count() + 1;
+            //export.IDOrder = DataProvider.ins.db.Orders.Count() + 1;
             export.Order = order;
 
             
@@ -162,14 +176,11 @@ namespace Management_Application.ViewSales
 
         void reloadCustomer()
         {
-            if(listCustomerName != null)
-                listCustomerName.Clear();
             if(listCustomers!=null)
                 listCustomers.Clear();
             listCustomers = DataProvider.ins.db.Customers.ToList();
-            listCustomerName = getCustomerNameList();
             comboboxCustomer.ItemsSource = null;
-            comboboxCustomer.ItemsSource = listCustomerName;
+            comboboxCustomer.ItemsSource = listCustomers;
         }
 
         void reloadProduct()
@@ -281,5 +292,77 @@ namespace Management_Application.ViewSales
             reloadProduct();
         }
 
+        //======================CART/CLEAR LIST ORDER PRODUCT======================
+        private void ButtonCart_Click(object sender, RoutedEventArgs e)
+        {
+            if(listOrderProducts != null && listOrderProducts.Count != 0)
+            {
+                OrderManagement window = new OrderManagement(listOrderProducts);
+                window.ShowDialog();
+                listOrderProducts.Clear();
+
+                listViewOrder.ItemsSource = null;
+                listViewOrder.ItemsSource = listOrderProducts;
+
+                reloadProduct();
+            }
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var item in listOrderProducts)
+            {
+                Product product = DataProvider.ins.db.Products.Find(item.IDProduct);
+                product.Amount += item.Amount;
+            }
+
+            try
+            {
+                DataProvider.ins.db.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Some errors have occurred!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            listOrderProducts.Clear();
+            listViewOrder.ItemsSource = null;
+            listViewOrder.ItemsSource = listOrderProducts;
+            reloadProduct();
+        }
+
+        private void ButtonOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Orders window = new Orders();
+            window.ShowDialog();
+        }
+
+        private void ButtonReload_Click(object sender, RoutedEventArgs e)
+        {
+
+            reloadProduct();
+            reloadCustomer();
+
+            foreach (var item in listOrderProducts)
+            {
+                Product product = DataProvider.ins.db.Products.Find(item.IDProduct);
+                product.Amount += item.Amount;
+            }
+
+            try
+            {
+                DataProvider.ins.db.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Some errors have occurred!", "Management Application", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            listOrderProducts.Clear();
+            listViewOrder.ItemsSource = null;
+            listViewOrder.ItemsSource = listOrderProducts;
+        }
     }
 }

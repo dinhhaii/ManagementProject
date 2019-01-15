@@ -26,6 +26,7 @@ namespace Management_Application.ViewProducts
         List<Input> listInput { get; set; }
         int count { get; set; }
 
+        Product receivedData { get; set; }
         public UpdateProduct(Product data)
         {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace Management_Application.ViewProducts
 
             if (data != null)
             {
+                receivedData = data;
                 imageProduct.Source = new BitmapImage(new Uri(data.Picture, UriKind.RelativeOrAbsolute));
 
                 txtboxID.Text = data.IDProduct;
@@ -71,7 +73,7 @@ namespace Management_Application.ViewProducts
             bool isSuccess = true;
 
             // Get product with PrimaryKey
-            var product = DataProvider.ins.db.Products.Find(txtboxID.Text);
+            var product = DataProvider.ins.db.Products.Find(receivedData.IDProduct);
             Category category = new Category();
 
             // Update data
@@ -100,7 +102,7 @@ namespace Management_Application.ViewProducts
             {
                 if(txtboxID.Text.ToString().Trim() == item.IDProduct.ToString().Trim())
                 {
-                    var input = DataProvider.ins.db.Inputs.Find(item.IDProduct,item.Serial);
+                    var input = DataProvider.ins.db.Inputs.Find(receivedData.IDProduct,item.Serial);
                     input.IDProduct = product.IDProduct;
                     input.Name = product.Name;
                     input.Price = product.Price;
