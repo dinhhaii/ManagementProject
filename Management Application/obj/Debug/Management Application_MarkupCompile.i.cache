@@ -1,0 +1,20 @@
+﻿Management Application
+
+
+winexe
+C#
+.cs
+C:\Users\DINH HAI\Desktop\ManagementProject\Management Application\obj\Debug\
+Management_Application
+none
+false
+DEBUG;TRACE
+C:\Users\DINH HAI\Desktop\ManagementProject\Management Application\App.xaml
+20-1650531967
+2-1556844510
+42-1197626857
+29952824214
+Home.xaml;Login.xaml;ViewCustomer\AddCustomer.xaml;ViewCustomer\Customers.xaml;ViewCustomer\FilterCustomer.xaml;ViewCustomer\UpdateCustomer.xaml;ViewImport\FilterImport.xaml;ViewImport\Import.xaml;ViewImport\UpdateImport.xaml;ViewProducts\AddCategory.xaml;ViewProducts\AddProduct.xaml;ViewProducts\FilterProduct.xaml;ViewProducts\Products.xaml;ViewProducts\UpdateProduct.xaml;ViewSales\AddDiscount.xaml;ViewSales\OrderManagement.xaml;ViewSales\Orders.xaml;ViewSales\Outputs.xaml;ViewSales\Sales.xaml;ViewStatistic\Statistics.xaml;
+
+True
+

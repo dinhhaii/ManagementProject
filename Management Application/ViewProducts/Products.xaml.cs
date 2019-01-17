@@ -182,9 +182,20 @@ namespace Management_Application.ViewProducts
                     {
                         if (listProducts[i] != null && listProducts[i].isSelected == true)
                         {
-                            List<Input> listInput = DataProvider.ins.db.Inputs.ToList();
-                            DataProvider.ins.db.Products.Remove(listProducts[i]);
+                            List<Order> listOrders = DataProvider.ins.db.Orders.ToList();
+                            foreach (var orderitem in listOrders)
+                            {
+                                var itemOutput = DataProvider.ins.db.Outputs.Find(listProducts[i].IDProduct, orderitem.IDOrder);
+                                if (itemOutput != null)
+                                {
+                                    DataProvider.ins.db.Outputs.Remove(itemOutput);
+                                }
+                            }
                             DataProvider.ins.db.SaveChanges();
+
+                            List<Input> listInput = DataProvider.ins.db.Inputs.ToList();
+                           
+                           
                             foreach (var value in listInput)
                             {
                                 var itemInput = DataProvider.ins.db.Inputs.Find(listProducts[i].IDProduct, value.Serial);
@@ -194,6 +205,10 @@ namespace Management_Application.ViewProducts
                                     DataProvider.ins.db.SaveChanges();
                                 }
                             }
+
+                            DataProvider.ins.db.Products.Remove(listProducts[i]);
+                            DataProvider.ins.db.SaveChanges();
+
                         }
                     }
                     reloadData();

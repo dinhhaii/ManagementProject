@@ -46,6 +46,7 @@
     <Property Name="Deposite" Type="Single" />
     <Property Name="IDStatus" Type="Int32" Nullable="false" />
     <Property Name="TotalItem" Type="Single" />
+    <Property Name="Amount" Type="Int32" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="Status" Relationship="Self.FK_Order_Status" FromRole="Order" ToRole="Status" />
     <NavigationProperty Name="Outputs" Relationship="Self.FK_Output_Order" FromRole="Order" ToRole="Output" />
@@ -132,7 +133,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
@@ -144,7 +147,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
@@ -156,7 +161,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Input_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Input" Type="Self.Input" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -168,7 +175,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_Status">
-    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Status" Type="Self.Status" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Status">

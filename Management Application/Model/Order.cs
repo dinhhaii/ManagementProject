@@ -27,6 +27,7 @@ namespace Management_Application.Model
         public Nullable<float> Deposite { get; set; }
         public int IDStatus { get; set; }
         public Nullable<float> TotalItem { get; set; }
+        public Nullable<int> Amount { get; set; }
         public bool isSelected { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Status Status { get; set; }

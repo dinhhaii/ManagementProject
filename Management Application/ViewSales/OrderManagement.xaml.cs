@@ -25,6 +25,7 @@ namespace Management_Application.ViewSales
         List<Status> listStatus { get; set; }
 
         private float totalOrder = 0;
+        private int amountOrder = 0;
 
         public OrderManagement(List<Output> data)
         {
@@ -51,13 +52,16 @@ namespace Management_Application.ViewSales
         void handlingData()
         {
             float total = 0;
+            int amount = 0;
             foreach(var item in listOrderProducts)
             {
                 total += ((item.Price??0) * (float)item.Amount)*(((float)100 - (float)item.Discount)/(float)100);
+                amount += (item.Amount ?? 0);
             }
             txtboxNumberItem.Text = listOrderProducts.Count.ToString();
             txtboxTotalItem.Text = total.ToString(".0##");
             totalOrder = total * ((float)100 - (float)(int)comboboxDiscount.SelectedItem)/(float)100;
+            amountOrder = amount;
             txtboxtotal.Text = totalOrder.ToString(".0##");
         }
 
@@ -120,6 +124,7 @@ namespace Management_Application.ViewSales
                 Order order = new Order();
                 order = listOrderProducts[0].Order;
                 order.TotalItem = totalOrder;
+                order.Amount = amountOrder;
                 order.Discount = (int)comboboxDiscount.SelectedItem;
                 order.IDCustomer = order.Customer.IDCustomer;
                 order.DateSale = DateTime.Now;

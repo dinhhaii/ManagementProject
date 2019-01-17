@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             xmlns:chart="http://mindfusion.eu/charting/wpf"
              xmlns:local="clr-namespace:Management_Application.ViewStatistic"
+             xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+             xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              mc:Ignorable="d" 
              Name="StatisticUserControl"
              d:DesignHeight="400" d:DesignWidth="800"
@@ -23,17 +26,21 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ComboBox 
-            Name="comboboxSelection" 
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center" 
-            Margin="10,0,0,0" 
-            Width="150"
-            SelectionChanged="comboboxSelection_SelectionChanged">
-        </ComboBox>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Filter: " VerticalAlignment="Center" Margin="20,0,20,0"></TextBlock>
+            <ComboBox 
+                Name="comboboxSelection" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" 
+                Margin="10,0,0,0" 
+                Width="150"
+                SelectionChanged="comboboxSelection_SelectionChanged">
+            </ComboBox>
+        </StackPanel>
+        
         
         <!--DATE-->
-        <Grid Name="gridDate" Grid.Row="1">
+        <Grid Name="gridDate"  Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -98,8 +105,8 @@
                                 <TextBlock Text="VNĐ"></TextBlock>
                             </StackPanel>
                         </Grid>
-                        
-                        <MetroChart:ClusteredColumnChart Name="DateChart" Foreground="White" ChartTitle="NUMBER OF PRODUCTS SOLD" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+
+                        <MetroChart:ClusteredColumnChart Name="amountDateChartColumn" Foreground="White" ChartTitle="NUMBER OF PRODUCTS SOLD" ChartSubTitle="Unknown" Height="500" Background="Transparent">
                             <MetroChart:ClusteredColumnChart.Series>
                                 <MetroChart:ChartSeries                          
                                     Name="amountDateChart"
@@ -110,22 +117,171 @@
                             </MetroChart:ClusteredColumnChart.Series>
                         </MetroChart:ClusteredColumnChart>
 
-                        <!--<MetroChart: Name="DateChart2" Visibility="Collapsed" Foreground="White" ChartTitle="NUMBER OF PRODUCTS SOLD" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                        <MetroChart:PieChart Name="revenueDateChartPieChart" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                            <MetroChart:PieChart.Series>
+                                <MetroChart:ChartSeries                          
+                                    Name="revenueDateChart"
+                                    DisplayMember="IDOrder"
+                                    SeriesTitle="Orders"                                    
+                                    ValueMember="TotalItem">
+                                </MetroChart:ChartSeries>
+                            </MetroChart:PieChart.Series>
+                        </MetroChart:PieChart>
+
+                        <chartingToolkit:Chart Name="amountDateChartLine" Foreground="White" Title="NUMBER OF PRODUCTS SOLD" Height="500" Background="Transparent">
+                            <chartingToolkit:Chart.Series>
+                                <chartingToolkit:LineSeries
+                                    Name="amountDateChart1"
+                                    IndependentValuePath="DateSale"
+                                    DependentValuePath="Amount"
+                                    Title="">
+                                </chartingToolkit:LineSeries>
+                            </chartingToolkit:Chart.Series>
+                        </chartingToolkit:Chart>
+
+                        <MetroChart:ClusteredColumnChart Name="revenueDateChartColumn" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
                             <MetroChart:ClusteredColumnChart.Series>
                                 <MetroChart:ChartSeries                          
-                                    Name="amountDateChart1"
+                                    Name="revenueDateChart1"
+                                    DisplayMember="DateSale"
+                                    SeriesTitle="Orders"                                    
+                                    ValueMember="TotalItem">
+                                </MetroChart:ChartSeries>
+                            </MetroChart:ClusteredColumnChart.Series>
+                        </MetroChart:ClusteredColumnChart>
+
+
+                    </StackPanel>
+
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+
+        <!--MONTH-->
+        <Grid Visibility="Collapsed" Name="gridMonth" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <ComboBox 
+                    Name="month1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="10,0,20,0"
+                    Width="80"
+                    SelectionChanged="month1_SelectionChanged">
+                </ComboBox>
+
+                <ComboBox 
+                    Name="year1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="10,0,20,0"
+                    Width="80"
+                    SelectionChanged="month1_SelectionChanged">
+                </ComboBox>
+
+                <Button Name="buttonMonth" Background="Transparent" BorderBrush="Transparent" Click="buttonMonth_Click">
+                    <materialDesign:PackIcon Kind="ArrowRight"></materialDesign:PackIcon>
+                </Button>
+
+                <ComboBox 
+                    Name="month2"
+                    IsEnabled="False"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="10,0,20,0"
+                    Width="80"
+                    SelectionChanged="month2_SelectionChanged">
+                </ComboBox>
+
+                <ComboBox 
+                    Name="year2"
+                    IsEnabled="False"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="10,0,20,0"
+                    Width="80"
+                    SelectionChanged="month2_SelectionChanged">
+                </ComboBox>
+
+            </StackPanel>
+
+            <Grid Margin="0,10,0,0" Grid.Row="1">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Height" Value="40"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Grid
+                            Width="530"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="Number of imported products:"></TextBlock>
+                                <TextBlock FontWeight="Bold" Text="Number of sold products:"></TextBlock>
+                                <TextBlock FontWeight="Bold" Text="Revenue:"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Name="txtblocimportkMonth" HorizontalAlignment="Right" Margin="0,0,10,0" Text="0"></TextBlock>
+                                <TextBlock Name="txtblocsoldkMonth" HorizontalAlignment="Right" Margin="0,0,10,0" Text="0"></TextBlock>
+                                <TextBlock Name="txtblocrevenuekMonth" HorizontalAlignment="Right" Margin="0,0,10,0" Text="0"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="products"></TextBlock>
+                                <TextBlock Text="products"></TextBlock>
+                                <TextBlock Text="VNĐ"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <MetroChart:ClusteredColumnChart Name="amountMonthChartColumn" Foreground="White" ChartTitle="NUMBER OF PRODUCTS SOLD" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                            <MetroChart:ClusteredColumnChart.Series>
+                                <MetroChart:ChartSeries                          
+                                    Name="amountMonthChart"
                                     DisplayMember="Name"
                                     SeriesTitle="Product"                                    
                                     ValueMember="Amount">
                                 </MetroChart:ChartSeries>
                             </MetroChart:ClusteredColumnChart.Series>
-                        </MetroChart:>-->
-                        
+                        </MetroChart:ClusteredColumnChart>
 
-                        <MetroChart:ClusteredColumnChart Name="DateChart1" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                        <MetroChart:PieChart Name="revenueMonthChartPieChart" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                            <MetroChart:PieChart.Series>
+                                <MetroChart:ChartSeries                          
+                                    Name="revenueMonthChart"
+                                    DisplayMember="IDOrder"
+                                    SeriesTitle="Orders"                                    
+                                    ValueMember="TotalItem">
+                                </MetroChart:ChartSeries>
+                            </MetroChart:PieChart.Series>
+                        </MetroChart:PieChart>
+
+                        <chartingToolkit:Chart Name="amountMonthChartLine" Foreground="White" Title="NUMBER OF PRODUCTS SOLD" Height="500" Background="Transparent">
+                            <chartingToolkit:Chart.Series>
+                                <chartingToolkit:LineSeries
+                                    Name="amountMonthChart1"
+                                    IndependentValuePath="DateSale"
+                                    DependentValuePath="Amount"
+                                    Title="">
+                                </chartingToolkit:LineSeries>
+                            </chartingToolkit:Chart.Series>
+                        </chartingToolkit:Chart>
+
+                        <MetroChart:ClusteredColumnChart Name="revenueMonthChartColumn" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
                             <MetroChart:ClusteredColumnChart.Series>
                                 <MetroChart:ChartSeries                          
-                                    Name="revenueDateChart"
+                                    Name="revenueMonthChart1"
                                     DisplayMember="IDOrder"
                                     SeriesTitle="Orders"                                    
                                     ValueMember="TotalItem">
@@ -141,8 +297,126 @@
 
         </Grid>
 
-        
-        
-        
+        <!--YEAR-->
+        <Grid Visibility="Collapsed" Name="gridYear" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <ComboBox 
+                    Name="Year1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="10,0,20,0"
+                    Width="80"
+                    SelectionChanged="Year1_SelectionChanged">
+                </ComboBox>
+
+                <Button Name="buttonYear" Background="Transparent" BorderBrush="Transparent" Click="buttonYear_Click">
+                    <materialDesign:PackIcon Kind="ArrowRight"></materialDesign:PackIcon>
+                </Button>
+
+                <ComboBox 
+                    Name="Year2"
+                    IsEnabled="False"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="10,0,20,0"
+                    Width="80"
+                    SelectionChanged="Year2_SelectionChanged">
+                </ComboBox>
+
+
+            </StackPanel>
+
+            <Grid Margin="0,10,0,0" Grid.Row="1">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Height" Value="40"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Grid
+                            Width="530"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="Number of imported products:"></TextBlock>
+                                <TextBlock FontWeight="Bold" Text="Number of sold products:"></TextBlock>
+                                <TextBlock FontWeight="Bold" Text="Revenue:"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Name="txtblocimportkYear" HorizontalAlignment="Right" Margin="0,0,10,0" Text="0"></TextBlock>
+                                <TextBlock Name="txtblocsoldkYear" HorizontalAlignment="Right" Margin="0,0,10,0" Text="0"></TextBlock>
+                                <TextBlock Name="txtblocrevenuekYear" HorizontalAlignment="Right" Margin="0,0,10,0" Text="0"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="products"></TextBlock>
+                                <TextBlock Text="products"></TextBlock>
+                                <TextBlock Text="VNĐ"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <MetroChart:ClusteredColumnChart Name="amountYearChartColumn" Foreground="White" ChartTitle="NUMBER OF PRODUCTS SOLD" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                            <MetroChart:ClusteredColumnChart.Series>
+                                <MetroChart:ChartSeries                          
+                                    Name="amountYearChart"
+                                    DisplayMember="Name"
+                                    SeriesTitle="Product"                                    
+                                    ValueMember="Amount">
+                                </MetroChart:ChartSeries>
+                            </MetroChart:ClusteredColumnChart.Series>
+                        </MetroChart:ClusteredColumnChart>
+
+                        <MetroChart:PieChart Name="revenueYearChartPieChart" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                            <MetroChart:PieChart.Series>
+                                <MetroChart:ChartSeries                          
+                                    Name="revenueYearChart"
+                                    DisplayMember="IDOrder"
+                                    SeriesTitle="Orders"                                    
+                                    ValueMember="TotalItem">
+                                </MetroChart:ChartSeries>
+                            </MetroChart:PieChart.Series>
+                        </MetroChart:PieChart>
+
+                        <chartingToolkit:Chart Name="amountYearChartLine" Foreground="White" Title="NUMBER OF PRODUCTS SOLD" Height="500" Background="Transparent">
+                            <chartingToolkit:Chart.Series>
+                                <chartingToolkit:LineSeries
+                                    Name="amountYearChart1"
+                                    IndependentValuePath="DateSale"
+                                    DependentValuePath="Amount"
+                                    Title="">
+                                </chartingToolkit:LineSeries>
+                            </chartingToolkit:Chart.Series>
+                        </chartingToolkit:Chart>
+
+                        <MetroChart:ClusteredColumnChart Name="revenueYearChartColumn" Foreground="White" ChartTitle="REVENUE" ChartSubTitle="Unknown" Height="500" Background="Transparent">
+                            <MetroChart:ClusteredColumnChart.Series>
+                                <MetroChart:ChartSeries                          
+                                    Name="revenueYearChart1"
+                                    DisplayMember="IDOrder"
+                                    SeriesTitle="Orders"                                    
+                                    ValueMember="TotalItem">
+                                </MetroChart:ChartSeries>
+                            </MetroChart:ClusteredColumnChart.Series>
+                        </MetroChart:ClusteredColumnChart>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+
+
     </Grid>
 </UserControl>

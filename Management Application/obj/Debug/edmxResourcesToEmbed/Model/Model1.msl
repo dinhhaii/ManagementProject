@@ -42,6 +42,7 @@
           <ScalarProperty Name="Deposite" ColumnName="Deposite" />
           <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
           <ScalarProperty Name="TotalItem" ColumnName="TotalItem" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
